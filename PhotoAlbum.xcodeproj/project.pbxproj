@@ -21,6 +21,10 @@
 		7F28143F1837BC1700E11DF0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F2814211837BC1700E11DF0 /* UIKit.framework */; };
 		7F2814471837BC1700E11DF0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F2814451837BC1700E11DF0 /* InfoPlist.strings */; };
 		7F2814491837BC1700E11DF0 /* PhotoAlbumTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2814481837BC1700E11DF0 /* PhotoAlbumTests.m */; };
+		7F2814531837BD5B00E11DF0 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F2814521837BD5B00E11DF0 /* AssetsLibrary.framework */; };
+		7F2814561837C2AE00E11DF0 /* GerionCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2814551837C2AE00E11DF0 /* GerionCollectionViewController.m */; };
+		7F2814591837C66500E11DF0 /* GerionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2814581837C66500E11DF0 /* GerionCollectionViewCell.m */; };
+		7F2814621838B46000E11DF0 /* GerionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2814611838B46000E11DF0 /* GerionDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,13 @@
 		7F2814441837BC1700E11DF0 /* PhotoAlbumTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoAlbumTests-Info.plist"; sourceTree = "<group>"; };
 		7F2814461837BC1700E11DF0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7F2814481837BC1700E11DF0 /* PhotoAlbumTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbumTests.m; sourceTree = "<group>"; };
+		7F2814521837BD5B00E11DF0 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		7F2814541837C2AE00E11DF0 /* GerionCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GerionCollectionViewController.h; sourceTree = "<group>"; };
+		7F2814551837C2AE00E11DF0 /* GerionCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GerionCollectionViewController.m; sourceTree = "<group>"; };
+		7F2814571837C66500E11DF0 /* GerionCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GerionCollectionViewCell.h; sourceTree = "<group>"; };
+		7F2814581837C66500E11DF0 /* GerionCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GerionCollectionViewCell.m; sourceTree = "<group>"; };
+		7F2814601838B46000E11DF0 /* GerionDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GerionDetailViewController.h; sourceTree = "<group>"; };
+		7F2814611838B46000E11DF0 /* GerionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GerionDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F2814531837BD5B00E11DF0 /* AssetsLibrary.framework in Frameworks */,
 				7F2814201837BC1700E11DF0 /* CoreGraphics.framework in Frameworks */,
 				7F2814221837BC1700E11DF0 /* UIKit.framework in Frameworks */,
 				7F28141E1837BC1700E11DF0 /* Foundation.framework in Frameworks */,
@@ -101,6 +113,7 @@
 		7F28141C1837BC1700E11DF0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F2814521837BD5B00E11DF0 /* AssetsLibrary.framework */,
 				7F28141D1837BC1700E11DF0 /* Foundation.framework */,
 				7F28141F1837BC1700E11DF0 /* CoreGraphics.framework */,
 				7F2814211837BC1700E11DF0 /* UIKit.framework */,
@@ -115,6 +128,12 @@
 				7F28142C1837BC1700E11DF0 /* GerionAppDelegate.h */,
 				7F28142D1837BC1700E11DF0 /* GerionAppDelegate.m */,
 				7F28142F1837BC1700E11DF0 /* Main.storyboard */,
+				7F2814601838B46000E11DF0 /* GerionDetailViewController.h */,
+				7F2814611838B46000E11DF0 /* GerionDetailViewController.m */,
+				7F2814571837C66500E11DF0 /* GerionCollectionViewCell.h */,
+				7F2814581837C66500E11DF0 /* GerionCollectionViewCell.m */,
+				7F2814541837C2AE00E11DF0 /* GerionCollectionViewController.h */,
+				7F2814551837C2AE00E11DF0 /* GerionCollectionViewController.m */,
 				7F2814321837BC1700E11DF0 /* GerionViewController.h */,
 				7F2814331837BC1700E11DF0 /* GerionViewController.m */,
 				7F2814351837BC1700E11DF0 /* Images.xcassets */,
@@ -250,9 +269,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F2814561837C2AE00E11DF0 /* GerionCollectionViewController.m in Sources */,
+				7F2814621838B46000E11DF0 /* GerionDetailViewController.m in Sources */,
 				7F2814341837BC1700E11DF0 /* GerionViewController.m in Sources */,
 				7F28142E1837BC1700E11DF0 /* GerionAppDelegate.m in Sources */,
 				7F28142A1837BC1700E11DF0 /* main.m in Sources */,
+				7F2814591837C66500E11DF0 /* GerionCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,6 +483,7 @@
 				7F28144E1837BC1700E11DF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7F28144F1837BC1700E11DF0 /* Build configuration list for PBXNativeTarget "PhotoAlbumTests" */ = {
 			isa = XCConfigurationList;
@@ -469,6 +492,7 @@
 				7F2814511837BC1700E11DF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
