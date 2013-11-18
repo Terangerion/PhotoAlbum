@@ -29,6 +29,9 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     //NSLog(@"%@", self.sourceCell);
+    
+#warning 表示される画像が仕様の大きさと違います
+    
     self.detailImageView.image = self.sourceCell.imageView.image;
    // sender.
     

@@ -46,12 +46,17 @@
 // アイテム数の返答用メソッド
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     // AssetsLibraryが遅延してうまく写真画像数を取得できないため、大きめの値を設定 (本当はAssetsLibraryで取得した値を使いたい)
+#warning エラー：30枚しか表示されません
+// ヒント：このデリゲートメソッドはUICollectionViewのreloadDataメソッドで再度コールバックさせることができます
     return 30;
 }
 
 // セル内容の返答用メソッド
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GerionCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    
+#warning スクロールしようとしても画面がロックされてしまいます
+// ヒント：cellForItemAtIndexPathは何度も呼ばれるので、ここでenumerateGroupsWithTypes:usingBlock:を実行すると重くなります
     
     // AssetsLibraryでカメラロール情報を取得
     // ALAssetPropertyDateのDESCでソートしたい
@@ -65,6 +70,7 @@
                 if (asset) {
                     [assetList addObject:asset];
                 }else{
+#warning 注意：例外が発生することを前提としたコーディングは避けましょう
                     @try {
                         UIImage *assetImage = [UIImage imageWithCGImage:[assetList[ [indexPath row] ] aspectRatioThumbnail]];
                         cell.imageView.image = assetImage;
