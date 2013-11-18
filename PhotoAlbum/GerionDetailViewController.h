@@ -11,6 +11,9 @@
 #import "GerionCollectionViewCell.h"
 
 @interface GerionDetailViewController : UIViewController
+#warning 推奨：IBOutletでつなぐだけのプロパティはカテゴリへ書くとカプセル化できます
 @property (weak, nonatomic) IBOutlet UIImageView *detailImageView;
+#warning 推奨：strongは省略できます
+#warning エラー：メモリーリークしやすくなるので、他のコントローラで生成したUIコンポーネントを強参照してはいけません
 @property (strong, nonatomic) GerionCollectionViewCell *sourceCell;
 @end
