@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#warning エラー：iOS6へインストールできませんでした
-
 @interface GerionAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
