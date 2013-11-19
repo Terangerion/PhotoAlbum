@@ -7,13 +7,14 @@
 //
 
 #import "GerionDetailViewController.h"
-//#import "GerionCollectionViewCell.h"
 
 @interface GerionDetailViewController ()
-
+// IBOutlet用のプロパティをカプセル化
+@property (nonatomic) UIImageView *detailImageView;
 @end
 
 @implementation GerionDetailViewController
+@synthesize detailImageView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -28,17 +29,9 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    //NSLog(@"%@", self.sourceCell);
-    
 #warning 表示される画像が仕様の大きさと違います
-    
+    // AssetsURLを使用してカメラロールからFullResolutionImageサイズ にする必要あり
     self.detailImageView.image = self.sourceCell.imageView.image;
-   // sender.
-    
-//    GerionCollectionViewCell *cell = [sender.collectionView dequeueReusableCellWithReuseIdentifier:@"pushCell" forIndexPath:indexPath];
-   // seque;
-//    [self performSegueWithIdentifier:@"pushCellSeque" sender:self];
-//    [self select]
 }
 
 - (void)didReceiveMemoryWarning

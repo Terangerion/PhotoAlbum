@@ -10,8 +10,11 @@
 #import <UIKit/UIKit.h>
 #import "GerionCollectionViewCell.h"
 
-@interface GerionDetailViewController : UIViewController
-#warning 推奨：IBOutletでつなぐだけのプロパティはカテゴリへ書くとカプセル化できます
-@property (weak, nonatomic) IBOutlet UIImageView *detailImageView;
+@interface GerionDetailViewController : UIViewController {
+    @private
+    // IBOutlet用変数をカプセル化するため
+    IBOutlet UIImageView *detailImageView;
+}
+
 @property (weak, nonatomic) GerionCollectionViewCell *sourceCell;
 @end
