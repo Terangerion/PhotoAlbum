@@ -26,11 +26,9 @@
     return self;
 }
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
 }
-
 
 - (void)viewWillAppear:(BOOL)animated {
     self.assetList = [NSMutableArray array];
@@ -94,14 +92,8 @@
                 if (asset) {
                     [assetList addObject:asset];
                 }else{
-#warning 注意：例外が発生することを前提としたコーディングは避けましょう
-                    @try {
-                        UIImage *assetImage = [UIImage imageWithCGImage:[assetList[ [indexPath row] ] aspectRatioThumbnail]];
-                        cell.imageView.image = assetImage;
-                    }
-                    // [indexPath row] で例外が発生したとき
-                    @catch (NSException *exception) {
-                    }
+                    UIImage *assetImage = [UIImage imageWithCGImage:[assetList[ [indexPath row] ] aspectRatioThumbnail]];
+                    cell.imageView.image = assetImage;
                 }
             };
             //アルバム(group)からALAssetの取得
