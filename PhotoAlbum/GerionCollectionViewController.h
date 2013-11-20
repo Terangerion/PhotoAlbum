@@ -14,5 +14,7 @@
     ALAssetsLibrary *library;
     int itemCount;
 }
+#warning 推奨：インスタンス変数はヘッダに必要な情報ではないので、書かないほうが良いです
+
 @property  NSMutableArray *assetList;
 @end

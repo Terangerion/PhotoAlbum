@@ -6,6 +6,12 @@
 //  Copyright (c) 2013年 terangerion. All rights reserved.
 //
 
+#warning TODOを確認しておいてください
+// TODO: 表示される画像が仕様の大きさと違います
+// TODO: ピンチイン・ピンチアウトができません
+// TODO: スワイプができません
+// TODO: 撮影日が表示されていません
+
 #import "GerionDetailViewController.h"
 
 @interface GerionDetailViewController ()
@@ -29,7 +35,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-#warning 表示される画像が仕様の大きさと違います
+
     // AssetsURLを使用してカメラロールからFullResolutionImageサイズ にする必要あり
     self.detailImageView.image = self.sourceCell.imageView.image;
 }

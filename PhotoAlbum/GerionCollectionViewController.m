@@ -40,10 +40,13 @@
             [group setAssetsFilter:filter];
             [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop){
                 if (asset) {
+#warning エラー：Blocksの中でselfのプロパティを参照するとうっかり循環参照させやすくなります
+// ヒント：weakSelfパターン http://blog.katty.in/2605
                     [self.assetList addObject:asset];
                 }
             }];
         }else{
+#warning エラー：Blocksの中でselfのプロパティを参照するとうっかり循環参照させやすくなります
             itemCount = [self.assetList count];
             // collectionViewをreloadして、再度コレクション数を設定
             [self.collectionView reloadData];
@@ -61,6 +64,10 @@
 
 //** プロトコル準拠させるために、必要メソッドを追加 **
 //****************************************************************************************************
+#warning ↑こういう線は「pragma」ディレクティブのmarkを使うといいです。
+// http://xcatsan.blogspot.jp/2009/10/xcode-no.html
+
+#pragma mark -
 
 // セクション数の返答用メソッド
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -72,6 +79,7 @@
     return itemCount;
 }
 
+#warning さすがです、さくさく表示されます（^o^)/
 // セル内容の返答用メソッド
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GerionCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
