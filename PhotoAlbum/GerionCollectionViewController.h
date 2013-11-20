@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface GerionCollectionViewController : UICollectionViewController
-
+@interface GerionCollectionViewController : UICollectionViewController {
+    @private
+    ALAssetsLibrary *library;
+    int itemCount;
+}
+@property  NSMutableArray *assetList;
 @end

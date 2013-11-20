@@ -26,8 +26,34 @@
     return self;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated {
+    self.assetList = [NSMutableArray array];
+    library = [[ALAssetsLibrary alloc] init];
+    ALAssetsFilter *filter = [ALAssetsFilter allPhotos];
+    
+    [library enumerateGroupsWithTypes:ALAssetsGroupAll  usingBlock:^(ALAssetsGroup *group, BOOL *stop){
+        if (group) {
+            [group setAssetsFilter:filter];
+            [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop){
+                if (asset) {
+                    [self.assetList addObject:asset];
+                }
+            }];
+        }else{
+            itemCount = [self.assetList count];
+            // collectionViewをreloadして、再度コレクション数を設定
+            [self.collectionView reloadData];
+        }
+    }
+                         failureBlock:^(NSError *error){
+                             NSLog(@"failure");
+                         }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,15 +66,13 @@
 
 // セクション数の返答用メソッド
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    NSLog(@"section in collection");
     return 1;
 }
 
 // アイテム数の返答用メソッド
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    // AssetsLibraryが遅延してうまく写真画像数を取得できないため、大きめの値を設定 (本当はAssetsLibraryで取得した値を使いたい)
-#warning エラー：30枚しか表示されません
-// ヒント：このデリゲートメソッドはUICollectionViewのreloadDataメソッドで再度コールバックさせることができます
-    return 30;
+    return itemCount;
 }
 
 // セル内容の返答用メソッド
@@ -88,26 +112,12 @@
 }
 
 //****************************************************************************************************
-/*
-- (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
-    // segue のidentifier で、どの画面遷移か判別する。
-    // Storyboard 画面でsegue のidentifier を設定するのを忘れずに。
-    if ( [segue.identifier isEqualToString:@"pushCellSegue"] ) {
-        // 遷移先のUIViewControllerを指定
-        GerionDetailViewController *detailViewController = [segue destinationViewController];
-        //detailViewController.delegate = self;
-
-    }
-*/
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-        if ([segue.identifier isEqualToString:@"pushCellSegue"]) {
-            GerionDetailViewController *detailViewController = (GerionDetailViewController *)[segue destinationViewController];
-            detailViewController.sourceCell = sender;
-
-        }
-     
-   //     [self performSegueWithIdentifier:@"pushCellSegue" sender:self];
+    if ([segue.identifier isEqualToString:@"pushCellSegue"]) {
+        GerionDetailViewController *detailViewController = (GerionDetailViewController *)[segue destinationViewController];
+        detailViewController.sourceCell = sender;
     }
+}
     
 @end
