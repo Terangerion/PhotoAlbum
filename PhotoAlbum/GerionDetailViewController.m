@@ -7,10 +7,8 @@
 //
 
 #warning TODOを確認しておいてください
-// TODO: 表示される画像が仕様の大きさと違います
 // TODO: ピンチイン・ピンチアウトができません
 // TODO: スワイプができません
-// TODO: 撮影日が表示されていません
 
 #import "GerionDetailViewController.h"
 
@@ -40,6 +38,13 @@ ALAssetsLibrary *library;
     [library assetForURL:self.assetUrlFromSegue
              resultBlock:^(ALAsset *asset) {
                  self.detailImageView.image = [UIImage imageWithCGImage: [[asset defaultRepresentation] fullResolutionImage]];
+
+                 NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                 [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]]; // Localeの指定
+                 [df setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
+                 
+                 // 日付(NSDate) => 文字列(NSString)に変換
+                 self.dateLabel.text = [df stringFromDate:[asset valueForProperty:ALAssetPropertyDate]];
              } failureBlock: nil];
 }
 

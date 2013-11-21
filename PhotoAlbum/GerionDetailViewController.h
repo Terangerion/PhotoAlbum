@@ -14,5 +14,6 @@
 @interface GerionDetailViewController : UIViewController
 
 @property (nonatomic) NSURL *assetUrlFromSegue;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
 @end
