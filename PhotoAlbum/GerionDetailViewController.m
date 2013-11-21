@@ -15,6 +15,8 @@
 @interface GerionDetailViewController ()
 // IBOutlet用のプロパティをカプセル化
 @property (weak, nonatomic) IBOutlet UIImageView *detailImageView;
+@property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+
 @end
 
 @implementation GerionDetailViewController
