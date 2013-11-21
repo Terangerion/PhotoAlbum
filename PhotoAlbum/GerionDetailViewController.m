@@ -36,11 +36,10 @@ ALAssetsLibrary *library;
 {
     [super viewDidLoad];
 
-    // AssetsURLを使用してカメラロールからFullResolutionImageサイズ にする必要あり
     //AssetURLからALAssetを取得して、imageを設定
     [library assetForURL:self.assetUrlFromSegue
              resultBlock:^(ALAsset *asset) {
-                 self.detailImageView.image = [UIImage imageWithCGImage: [asset aspectRatioThumbnail]];
+                 self.detailImageView.image = [UIImage imageWithCGImage: [[asset defaultRepresentation] fullResolutionImage]];
              } failureBlock: nil];
 }
 
