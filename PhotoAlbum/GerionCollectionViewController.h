@@ -9,12 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface GerionCollectionViewController : UICollectionViewController {
-    @private
-    ALAssetsLibrary *library;
-    int itemCount;
-}
-#warning 推奨：インスタンス変数はヘッダに必要な情報ではないので、書かないほうが良いです
+@interface GerionCollectionViewController : UICollectionViewController
 
 @property  NSMutableArray *assetList;
 @end

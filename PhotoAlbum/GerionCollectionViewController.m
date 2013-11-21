@@ -18,6 +18,9 @@
 
 @implementation GerionCollectionViewController
 
+ALAssetsLibrary *library;
+int itemCount;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
