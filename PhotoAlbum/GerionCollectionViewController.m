@@ -37,20 +37,19 @@ int itemCount;
     self.assetList = [NSMutableArray array];
     library = [[ALAssetsLibrary alloc] init];
     ALAssetsFilter *filter = [ALAssetsFilter allPhotos];
-    
+
+    // weakSelfパターン http://blog.katty.in/2605
+    __block GerionCollectionViewController *blocksafeSelf = self;
     [library enumerateGroupsWithTypes:ALAssetsGroupAll  usingBlock:^(ALAssetsGroup *group, BOOL *stop){
         if (group) {
             [group setAssetsFilter:filter];
             [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop){
                 if (asset) {
-#warning エラー：Blocksの中でselfのプロパティを参照するとうっかり循環参照させやすくなります
-// ヒント：weakSelfパターン http://blog.katty.in/2605
-                    [self.assetList addObject:asset];
+                    [blocksafeSelf.assetList addObject:asset];
                 }
             }];
         }else{
-#warning エラー：Blocksの中でselfのプロパティを参照するとうっかり循環参照させやすくなります
-            itemCount = [self.assetList count];
+            itemCount = [blocksafeSelf.assetList count];
             // collectionViewをreloadして、再度コレクション数を設定
             [self.collectionView reloadData];
         }
