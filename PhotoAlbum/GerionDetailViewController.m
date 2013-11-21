@@ -16,11 +16,10 @@
 
 @interface GerionDetailViewController ()
 // IBOutlet用のプロパティをカプセル化
-@property (nonatomic) UIImageView *detailImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *detailImageView;
 @end
 
 @implementation GerionDetailViewController
-@synthesize detailImageView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
