@@ -21,6 +21,8 @@
 
 @implementation GerionDetailViewController
 
+ALAssetsLibrary *library;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,10 +35,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 
     // AssetsURLを使用してカメラロールからFullResolutionImageサイズ にする必要あり
-    self.detailImageView.image = self.sourceCell.imageView.image;
+    //AssetURLからALAssetを取得して、imageを設定
+    [library assetForURL:self.assetUrlFromSegue
+             resultBlock:^(ALAsset *asset) {
+                 self.detailImageView.image = [UIImage imageWithCGImage: [asset aspectRatioThumbnail]];
+             } failureBlock: nil];
 }
 
 - (void)didReceiveMemoryWarning

@@ -9,12 +9,10 @@
 
 #import <UIKit/UIKit.h>
 #import "GerionCollectionViewCell.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface GerionDetailViewController : UIViewController
 
-#warning 注意：弱参照にすると、前画面のViewControllerが開放されてしまうと参照できなくなってしまいます
-// ビューコントローラ間で、MVCのViewに当たるオブジェクトを直接やりとりするのは一般的では無いと思います。
-// ここは、ViewオブジェクトではなくModel（AssetsURL）を受け渡すようにしてみてはどうでしょうか。
-@property (weak, nonatomic) GerionCollectionViewCell *sourceCell;
+@property (nonatomic) NSURL *assetUrlFromSegue;
 
 @end

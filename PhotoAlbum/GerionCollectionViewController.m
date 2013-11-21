@@ -67,7 +67,7 @@ int itemCount;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"pushCellSegue"]) {
         GerionDetailViewController *detailViewController = (GerionDetailViewController *)[segue destinationViewController];
-        detailViewController.sourceCell = sender;
+        detailViewController.assetUrlFromSegue = ((GerionCollectionViewCell *)sender).imageView.assetUrl;
     }
 }
 
@@ -87,6 +87,7 @@ int itemCount;
     GerionCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     UIImage *assetImage = [UIImage imageWithCGImage:[self.assetList[ [indexPath row] ] aspectRatioThumbnail]];
     cell.imageView.image = assetImage;
+    cell.imageView.assetUrl = [self.assetList[[indexPath row]] valueForProperty:ALAssetPropertyAssetURL];
     return cell;
 }
     
