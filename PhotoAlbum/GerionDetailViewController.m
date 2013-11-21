@@ -34,17 +34,18 @@ ALAssetsLibrary *library;
 {
     [super viewDidLoad];
 
+    __block GerionDetailViewController *blocksafeSelf = self;
     //AssetURLからALAssetを取得して、imageを設定
     [library assetForURL:self.assetUrlFromSegue
              resultBlock:^(ALAsset *asset) {
-                 self.detailImageView.image = [UIImage imageWithCGImage: [[asset defaultRepresentation] fullResolutionImage]];
+                 blocksafeSelf.detailImageView.image = [UIImage imageWithCGImage: [[asset defaultRepresentation] fullResolutionImage]];
 
                  NSDateFormatter *df = [[NSDateFormatter alloc] init];
                  [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]]; // Localeの指定
                  [df setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
                  
                  // 日付(NSDate) => 文字列(NSString)に変換
-                 self.dateLabel.text = [df stringFromDate:[asset valueForProperty:ALAssetPropertyDate]];
+                 blocksafeSelf.dateLabel.text = [df stringFromDate:[asset valueForProperty:ALAssetPropertyDate]];
              } failureBlock: nil];
 }
 
