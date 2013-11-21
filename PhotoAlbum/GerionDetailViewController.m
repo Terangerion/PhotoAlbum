@@ -36,7 +36,7 @@ ALAssetsLibrary *library;
 
     __block GerionDetailViewController *blocksafeSelf = self;
     //AssetURLからALAssetを取得して、imageを設定
-    [library assetForURL:self.assetUrlFromSegue
+    [library assetForURL:blocksafeSelf.assetUrlFromSegue
              resultBlock:^(ALAsset *asset) {
                  blocksafeSelf.detailImageView.image = [UIImage imageWithCGImage: [[asset defaultRepresentation] fullResolutionImage]];
 
