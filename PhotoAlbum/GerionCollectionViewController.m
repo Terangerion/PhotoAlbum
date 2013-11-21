@@ -65,39 +65,30 @@ int itemCount;
     // Dispose of any resources that can be recreated.
 }
 
-//** プロトコル準拠させるために、必要メソッドを追加 **
-//****************************************************************************************************
-#warning ↑こういう線は「pragma」ディレクティブのmarkを使うといいです。
-// http://xcatsan.blogspot.jp/2009/10/xcode-no.html
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"pushCellSegue"]) {
+        GerionDetailViewController *detailViewController = (GerionDetailViewController *)[segue destinationViewController];
+        detailViewController.sourceCell = sender;
+    }
+}
 
 #pragma mark -
-
+#pragma mark プロトコル準拠させるためのメソッド群
+// http://xcatsan.blogspot.jp/2009/10/xcode-no.html
 // セクション数の返答用メソッド
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
-
 // アイテム数の返答用メソッド
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     return itemCount;
 }
-
-#warning さすがです、さくさく表示されます（^o^)/
 // セル内容の返答用メソッド
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GerionCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     UIImage *assetImage = [UIImage imageWithCGImage:[self.assetList[ [indexPath row] ] aspectRatioThumbnail]];
     cell.imageView.image = assetImage;
     return cell;
-}
-
-//****************************************************************************************************
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"pushCellSegue"]) {
-        GerionDetailViewController *detailViewController = (GerionDetailViewController *)[segue destinationViewController];
-        detailViewController.sourceCell = sender;
-    }
 }
     
 @end
