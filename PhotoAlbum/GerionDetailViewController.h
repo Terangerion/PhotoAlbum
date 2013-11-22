@@ -17,5 +17,6 @@
 @property (nonatomic) NSURL *assetUrlFromSegue;
 - (IBAction)rightSwiped:(id)sender;
 - (IBAction)leftSwiped:(id)sender;
+- (IBAction)handlePinchGesture:(id)sender;
 
 @end

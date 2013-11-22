@@ -69,28 +69,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" maximumZoomScale="8" id="rUm-l7-Viy">
-                                <rect key="frame" x="0.0" y="0.0" width="327" height="581"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="9Od-9J-8h7">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="574"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <gestureRecognizers/>
-                                        <connections>
-                                            <outletCollection property="gestureRecognizers" destination="CN1-r4-3bJ" appends="YES" id="74b-zL-xAR"/>
-                                            <outletCollection property="gestureRecognizers" destination="3c2-Vz-H9n" appends="YES" id="IMo-Ld-Yr9"/>
-                                        </connections>
-                                    </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fQi-Na-5QI">
-                                        <rect key="frame" x="23" y="462" width="280" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </scrollView>
+                            <imageView multipleTouchEnabled="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="9Od-9J-8h7">
+                                <rect key="frame" x="0.0" y="-3" width="320" height="574"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="zFO-oT-zmk" appends="YES" id="vLl-Ba-yIB"/>
+                                </connections>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fQi-Na-5QI">
+                                <rect key="frame" x="20" y="422" width="280" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -99,7 +92,6 @@
                     <connections>
                         <outlet property="dateLabel" destination="fQi-Na-5QI" id="Rom-vu-BX3"/>
                         <outlet property="detailImageView" destination="9Od-9J-8h7" id="LsY-MM-5PF"/>
-                        <outlet property="detailScrollView" destination="rUm-l7-Viy" id="KJp-Br-0P1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AZO-5P-4gT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -113,6 +105,12 @@
                         <action selector="leftSwiped:" destination="ucw-2R-Uc7" id="SfP-Kf-SAS"/>
                     </connections>
                 </swipeGestureRecognizer>
+                <pinchGestureRecognizer scale="8" id="zFO-oT-zmk">
+                    <connections>
+                        <action selector="handlePinchGesture:" destination="ucw-2R-Uc7" id="qoG-R6-sMa"/>
+                        <outlet property="delegate" destination="ucw-2R-Uc7" id="hpO-Wr-64r"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="227" y="324"/>
         </scene>

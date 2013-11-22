@@ -7,7 +7,6 @@
 //
 
 #warning TODOを確認しておいてください
-// TODO: ピンチイン・ピンチアウトができません
 // TODO: スワイプができません
 
 #import "GerionDetailViewController.h"
@@ -15,8 +14,6 @@
 
 @interface GerionDetailViewController ()
 // IBOutlet用のプロパティをカプセル化
-@property (weak, nonatomic) IBOutlet UIScrollView *detailScrollView;
-
 @property (weak, nonatomic) IBOutlet UIImageView *detailImageView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
@@ -54,7 +51,10 @@ ALAssetsLibrary *library;
              } failureBlock: nil];
     
     // ScrollViewのデリゲート先に設定
-    self.detailScrollView.delegate = self;
+//    self.detailScrollView.delegate = self;
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,8 +107,10 @@ ALAssetsLibrary *library;
 }
 
 // ピンチイン、ピンチアウト用メソッド
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
-    return self.detailImageView;
+- (IBAction)handlePinchGesture:(UIPinchGestureRecognizer *)sender {
+    NSLog(@"hoge");
+    //self.detailImageView.image.scale =
+    self.detailImageView.transform = CGAffineTransformMakeScale(sender.scale, sender.scale);
 }
 
 @end
