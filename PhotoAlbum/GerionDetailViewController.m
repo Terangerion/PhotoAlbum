@@ -6,9 +6,6 @@
 //  Copyright (c) 2013年 terangerion. All rights reserved.
 //
 
-#warning TODOを確認しておいてください
-// TODO: スワイプができません
-
 #import "GerionDetailViewController.h"
 #import "GerionCollectionViewController.h"
 
