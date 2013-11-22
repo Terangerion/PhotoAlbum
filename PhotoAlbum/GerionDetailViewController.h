@@ -11,12 +11,12 @@
 #import "GerionCollectionViewCell.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
-// UIScrollViewDelegate プロトコルに適合
-@interface GerionDetailViewController : UIViewController <UIScrollViewDelegate>
+@interface GerionDetailViewController : UIViewController
 
 @property (nonatomic) NSURL *assetUrlFromSegue;
 - (IBAction)rightSwiped:(id)sender;
 - (IBAction)leftSwiped:(id)sender;
 - (IBAction)handlePinchGesture:(id)sender;
+- (IBAction)handleSwiped:(UISwipeGestureRecognizer *)sender;
 
 @end

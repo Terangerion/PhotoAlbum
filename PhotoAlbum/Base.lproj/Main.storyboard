@@ -65,7 +65,7 @@
         <scene sceneID="su6-ew-MIo">
             <objects>
                 <viewController id="ucw-2R-Uc7" customClass="GerionDetailViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="2Fv-gk-y8a">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="2Fv-gk-y8a">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -87,6 +87,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="3c2-Vz-H9n" appends="YES" id="8eB-U7-vW5"/>
+                            <outletCollection property="gestureRecognizers" destination="CN1-r4-3bJ" appends="YES" id="i7J-hs-LXf"/>
+                            <outletCollection property="gestureRecognizers" destination="XnT-ba-OHd" appends="YES" id="mm2-lH-o6Z"/>
+                            <outletCollection property="gestureRecognizers" destination="1uP-sP-tYk" appends="YES" id="RBT-BL-zAH"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="写真詳細" id="Wkg-pm-CdD"/>
                     <connections>
@@ -95,22 +101,32 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AZO-5P-4gT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="right" id="3c2-Vz-H9n">
-                    <connections>
-                        <action selector="rightSwiped:" destination="ucw-2R-Uc7" id="58D-CZ-7OW"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <swipeGestureRecognizer direction="left" id="CN1-r4-3bJ">
-                    <connections>
-                        <action selector="leftSwiped:" destination="ucw-2R-Uc7" id="SfP-Kf-SAS"/>
-                    </connections>
-                </swipeGestureRecognizer>
                 <pinchGestureRecognizer scale="8" id="zFO-oT-zmk">
                     <connections>
                         <action selector="handlePinchGesture:" destination="ucw-2R-Uc7" id="qoG-R6-sMa"/>
                         <outlet property="delegate" destination="ucw-2R-Uc7" id="hpO-Wr-64r"/>
                     </connections>
                 </pinchGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="3c2-Vz-H9n" userLabel="Right Swipe 1 touches Gesture Recognizer">
+                    <connections>
+                        <action selector="handleSwiped:" destination="ucw-2R-Uc7" id="CY5-u1-0pK"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" id="CN1-r4-3bJ" userLabel="Left Swipe 1 touches Gesture Recognizer">
+                    <connections>
+                        <action selector="handleSwiped:" destination="ucw-2R-Uc7" id="hfE-tV-7ud"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" numberOfTouchesRequired="2" id="XnT-ba-OHd" userLabel="Right Swipe 2 touches Gesture Recognizer">
+                    <connections>
+                        <action selector="handleSwiped:" destination="ucw-2R-Uc7" id="ER9-98-37H"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="left" numberOfTouchesRequired="2" id="1uP-sP-tYk" userLabel="Left Swipe 2 touches Gesture Recognizer">
+                    <connections>
+                        <action selector="handleSwiped:" destination="ucw-2R-Uc7" id="TjJ-Ws-qMc"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="227" y="324"/>
         </scene>
