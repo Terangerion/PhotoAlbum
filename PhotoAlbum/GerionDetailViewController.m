@@ -11,9 +11,12 @@
 // TODO: スワイプができません
 
 #import "GerionDetailViewController.h"
+#import "GerionCollectionViewController.h"
 
 @interface GerionDetailViewController ()
 // IBOutlet用のプロパティをカプセル化
+@property (weak, nonatomic) IBOutlet UIScrollView *detailScrollView;
+
 @property (weak, nonatomic) IBOutlet UIImageView *detailImageView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 
@@ -35,7 +38,7 @@ ALAssetsLibrary *library;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     __block GerionDetailViewController *blocksafeSelf = self;
     //AssetURLからALAssetを取得して、imageを設定
     [library assetForURL:blocksafeSelf.assetUrlFromSegue
@@ -49,12 +52,63 @@ ALAssetsLibrary *library;
                  // 日付(NSDate) => 文字列(NSString)に変換
                  blocksafeSelf.dateLabel.text = [df stringFromDate:[asset valueForProperty:ALAssetPropertyDate]];
              } failureBlock: nil];
+    
+    // ScrollViewのデリゲート先に設定
+    self.detailScrollView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)rightSwiped:(id)sender {
+ //   NSLog(@"%@", self.assetUrlFromSegue);
+    
+    
+    __block GerionDetailViewController *blocksafeSelf = self;
+    //AssetURLからALAssetを取得して、imageを設定
+    [library assetForURL:[GerionCollectionViewController nextAssetUrl:blocksafeSelf.assetUrlFromSegue]
+             resultBlock:^(ALAsset *asset) {
+                 blocksafeSelf.detailImageView.image = [UIImage imageWithCGImage: [[asset defaultRepresentation] fullResolutionImage]];
+                 
+                 NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                 [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]]; // Localeの指定
+                 [df setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
+                 
+                 // 日付(NSDate) => 文字列(NSString)に変換
+                 blocksafeSelf.dateLabel.text = [df stringFromDate:[asset valueForProperty:ALAssetPropertyDate]];
+                 
+                 
+                 // AssetURLをジェスチャ後のものに更新
+                 blocksafeSelf.assetUrlFromSegue = [GerionCollectionViewController nextAssetUrl:blocksafeSelf.assetUrlFromSegue];
+             } failureBlock: nil];
+}
+
+- (IBAction)leftSwiped:(id)sender {
+    __block GerionDetailViewController *blocksafeSelf = self;
+    //AssetURLからALAssetを取得して、imageを設定
+    [library assetForURL:[GerionCollectionViewController prevAssetUrl:blocksafeSelf.assetUrlFromSegue]
+             resultBlock:^(ALAsset *asset) {
+                 blocksafeSelf.detailImageView.image = [UIImage imageWithCGImage: [[asset defaultRepresentation] fullResolutionImage]];
+                 
+                 NSDateFormatter *df = [[NSDateFormatter alloc] init];
+                 [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]]; // Localeの指定
+                 [df setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
+                 
+                 // 日付(NSDate) => 文字列(NSString)に変換
+                 blocksafeSelf.dateLabel.text = [df stringFromDate:[asset valueForProperty:ALAssetPropertyDate]];
+                 
+                 
+                 // AssetURLをジェスチャ後のものに更新
+                 blocksafeSelf.assetUrlFromSegue = [GerionCollectionViewController prevAssetUrl:blocksafeSelf.assetUrlFromSegue];
+             } failureBlock: nil];
+}
+
+// ピンチイン、ピンチアウト用メソッド
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.detailImageView;
 }
 
 @end

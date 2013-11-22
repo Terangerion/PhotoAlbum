@@ -9,7 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
+static NSMutableArray *assetList;
+
 @interface GerionCollectionViewController : UICollectionViewController
 
-@property  NSMutableArray *assetList;
+// @property  NSMutableArray *assetList;
+//+ (NSMutableArray *)assetList;
+
++ (NSURL *)prevAssetUrl:(NSURL *)assetUrl;
++ (NSURL *)nextAssetUrl:(NSURL *)assetUrl;
+
 @end

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7F28141E1837BC1700E11DF0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F28141D1837BC1700E11DF0 /* Foundation.framework */; };
 		7F2814201837BC1700E11DF0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F28141F1837BC1700E11DF0 /* CoreGraphics.framework */; };
 		7F2814221837BC1700E11DF0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F2814211837BC1700E11DF0 /* UIKit.framework */; };
 		7F2814281837BC1700E11DF0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7F2814261837BC1700E11DF0 /* InfoPlist.strings */; };
@@ -26,6 +25,7 @@
 		7F2814591837C66500E11DF0 /* GerionCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2814581837C66500E11DF0 /* GerionCollectionViewCell.m */; };
 		7F2814621838B46000E11DF0 /* GerionDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F2814611838B46000E11DF0 /* GerionDetailViewController.m */; };
 		7F281465183DACC000E11DF0 /* GerionThumbnailImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F281464183DACC000E11DF0 /* GerionThumbnailImageView.m */; };
+		7F281467183DD96400E11DF0 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F281466183DD96400E11DF0 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +67,7 @@
 		7F2814611838B46000E11DF0 /* GerionDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GerionDetailViewController.m; sourceTree = "<group>"; };
 		7F281463183DACC000E11DF0 /* GerionThumbnailImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GerionThumbnailImageView.h; sourceTree = "<group>"; };
 		7F281464183DACC000E11DF0 /* GerionThumbnailImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GerionThumbnailImageView.m; sourceTree = "<group>"; };
+		7F281466183DD96400E11DF0 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,10 +75,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F281467183DD96400E11DF0 /* AVFoundation.framework in Frameworks */,
 				7F2814531837BD5B00E11DF0 /* AssetsLibrary.framework in Frameworks */,
 				7F2814201837BC1700E11DF0 /* CoreGraphics.framework in Frameworks */,
 				7F2814221837BC1700E11DF0 /* UIKit.framework in Frameworks */,
-				7F28141E1837BC1700E11DF0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +117,7 @@
 		7F28141C1837BC1700E11DF0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7F281466183DD96400E11DF0 /* AVFoundation.framework */,
 				7F2814521837BD5B00E11DF0 /* AssetsLibrary.framework */,
 				7F28141D1837BC1700E11DF0 /* Foundation.framework */,
 				7F28141F1837BC1700E11DF0 /* CoreGraphics.framework */,

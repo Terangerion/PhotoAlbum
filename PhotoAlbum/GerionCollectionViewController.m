@@ -21,6 +21,41 @@
 ALAssetsLibrary *library;
 int itemCount;
 
+//+ (NSMutableArray *)assetList {
+//    return assetList;
+//}
+
++ (NSURL *)prevOrNextAssetUrl:(int)num assetUrl:(NSURL *)assetUrl {
+    NSURL *hitAssetUrl;
+    @try {
+        for (int i=0; i < assetList.count; i++) {
+            if ([ assetUrl isEqual:([assetList[i] valueForProperty:ALAssetPropertyAssetURL]) ]) {
+                hitAssetUrl = [assetList[i + num] valueForProperty:ALAssetPropertyAssetURL];
+                break;
+            };
+        }
+    }
+    @catch (NSException *exception) {
+        hitAssetUrl = Nil;
+        if (num == 1) {
+            hitAssetUrl = [assetList[[assetList count] - 1] valueForProperty:ALAssetPropertyAssetURL];
+        } else {
+            hitAssetUrl = [assetList[0] valueForProperty:ALAssetPropertyAssetURL];
+        }
+    }
+    @finally {
+        return hitAssetUrl;
+    }
+}
+
++ (NSURL *)prevAssetUrl:(NSURL *)assetUrl {
+    return [GerionCollectionViewController prevOrNextAssetUrl:+1 assetUrl:assetUrl];
+}
+
++ (NSURL *)nextAssetUrl:(NSURL *)assetUrl {
+    return [GerionCollectionViewController prevOrNextAssetUrl:-1 assetUrl:assetUrl];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
@@ -34,22 +69,27 @@ int itemCount;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    self.assetList = [NSMutableArray array];
+//    self.assetList = [NSMutableArray array];
+    assetList = [NSMutableArray array];
     library = [[ALAssetsLibrary alloc] init];
     ALAssetsFilter *filter = [ALAssetsFilter allPhotos];
 
     // weakSelfパターン http://blog.katty.in/2605
-    __block GerionCollectionViewController *blocksafeSelf = self;
+//    __block GerionCollectionViewController *blocksafeSelf = self;
     [library enumerateGroupsWithTypes:ALAssetsGroupAll  usingBlock:^(ALAssetsGroup *group, BOOL *stop){
         if (group) {
             [group setAssetsFilter:filter];
             [group enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop){
                 if (asset) {
-                    [blocksafeSelf.assetList addObject:asset];
+//                    [blocksafeSelf.assetList addObject:asset];
+//                    [[GerionCollectionViewController assetList] addObject:asset];
+                    [assetList addObject:asset];
                 }
             }];
         }else{
-            itemCount = [blocksafeSelf.assetList count];
+//            itemCount = [blocksafeSelf.assetList count];
+//            itemCount = [[GerionCollectionViewController assetList] count];
+            itemCount = [assetList count];
             // collectionViewをreloadして、再度コレクション数を設定
             [self.collectionView reloadData];
         }
@@ -85,9 +125,13 @@ int itemCount;
 // セル内容の返答用メソッド
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     GerionCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    UIImage *assetImage = [UIImage imageWithCGImage:[self.assetList[ [indexPath row] ] aspectRatioThumbnail]];
+//    UIImage *assetImage = [UIImage imageWithCGImage:[self.assetList[ [indexPath row] ] aspectRatioThumbnail]];
+//    UIImage *assetImage = [UIImage imageWithCGImage:[[GerionCollectionViewController assetList][ [indexPath row] ] aspectRatioThumbnail]];
+    UIImage *assetImage = [UIImage imageWithCGImage:[assetList[ [indexPath row] ] aspectRatioThumbnail]];
     cell.imageView.image = assetImage;
-    cell.imageView.assetUrl = [self.assetList[[indexPath row]] valueForProperty:ALAssetPropertyAssetURL];
+//    cell.imageView.assetUrl = [self.assetList[[indexPath row]] valueForProperty:ALAssetPropertyAssetURL];
+//    cell.imageView.assetUrl = [[GerionCollectionViewController assetList][[indexPath row]] valueForProperty:ALAssetPropertyAssetURL];
+    cell.imageView.assetUrl = [assetList[[indexPath row]] valueForProperty:ALAssetPropertyAssetURL];
     return cell;
 }
     
