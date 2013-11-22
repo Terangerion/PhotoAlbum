@@ -24,6 +24,7 @@
 ALAssetsLibrary *library;
 BOOL isRightEdge = false;
 BOOL isLeftEdge = false;
+CGPoint startLocation;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,25 +39,7 @@ BOOL isLeftEdge = false;
 {
     [super viewDidLoad];
     
-    __block GerionDetailViewController *blocksafeSelf = self;
-    //AssetURLからALAssetを取得して、imageを設定
-    [library assetForURL:blocksafeSelf.assetUrlFromSegue
-             resultBlock:^(ALAsset *asset) {
-                 blocksafeSelf.detailImageView.image = [UIImage imageWithCGImage: [[asset defaultRepresentation] fullResolutionImage]];
-
-                 NSDateFormatter *df = [[NSDateFormatter alloc] init];
-                 [df setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"ja_JP"]]; // Localeの指定
-                 [df setDateFormat:@"yyyy/MM/dd HH:mm:ss"];
-                 
-                 // 日付(NSDate) => 文字列(NSString)に変換
-                 blocksafeSelf.dateLabel.text = [df stringFromDate:[asset valueForProperty:ALAssetPropertyDate]];
-             } failureBlock: nil];
-    
-    // ScrollViewのデリゲート先に設定
-//    self.detailScrollView.delegate = self;
-    
-    
-    
+    [self updateDetailView:@"selected"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -65,18 +48,19 @@ BOOL isLeftEdge = false;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)updateDetailView:(BOOL)isPrevAsset {
+- (void)updateDetailView:(NSString *)imageIndexState {
     __block GerionDetailViewController *blocksafeSelf = self;
-    
     NSURL *newAssetUrl;
-    if (isPrevAsset) {
+    BOOL isSelected = NO;
+    if ([imageIndexState isEqualToString:@"prev"]) {
         newAssetUrl = [GerionCollectionViewController prevAssetUrl:blocksafeSelf.assetUrlFromSegue];
-    } else {
+    } else if ([imageIndexState isEqualToString:@"next"]) {
         newAssetUrl = [GerionCollectionViewController nextAssetUrl:blocksafeSelf.assetUrlFromSegue];
+    } else {
+        isSelected = YES;
+        newAssetUrl = blocksafeSelf.assetUrlFromSegue;
     }
-    
     //AssetURLからALAssetを取得して、imageを設定
-//    [library assetForURL:[GerionCollectionViewController prevAssetUrl:blocksafeSelf.assetUrlFromSegue]
     [library assetForURL:newAssetUrl
              resultBlock:^(ALAsset *asset) {
                  blocksafeSelf.detailImageView.image = [UIImage imageWithCGImage: [[asset defaultRepresentation] fullResolutionImage]];
@@ -89,8 +73,9 @@ BOOL isLeftEdge = false;
                  blocksafeSelf.dateLabel.text = [df stringFromDate:[asset valueForProperty:ALAssetPropertyDate]];
                  
                  // AssetURLをジェスチャ後のものに更新
-//                 blocksafeSelf.assetUrlFromSegue = [GerionCollectionViewController prevAssetUrl:blocksafeSelf.assetUrlFromSegue];
-                 blocksafeSelf.assetUrlFromSegue = newAssetUrl;
+                 if (!isSelected) {
+                     blocksafeSelf.assetUrlFromSegue = newAssetUrl;
+                 }
              } failureBlock: nil];
 }
 
@@ -108,22 +93,26 @@ BOOL isLeftEdge = false;
         // スワイプの方向による分岐
         // 右端まで（左端まで）来たら次の（前の）画像があれば、それを表示する。撮影日表示部を更新する。
         if ((sender.direction == UISwipeGestureRecognizerDirectionRight) && isRightEdge) {
-            [self updateDetailView:YES];
+            [self updateDetailView:@"prev"];
         } else if ((sender.direction == UISwipeGestureRecognizerDirectionLeft) && isLeftEdge ) {
-            [self updateDetailView:NO];
+            [self updateDetailView:@"next"];
         }
-    } else if (sender.numberOfTouches == 2) {
+    }
+    /*
+    else if (sender.numberOfTouches == 2) {
         // スワイプの方向による分岐
         // 右端まで（左端まで）来ても次の（前の）画像は表示しない。
         if (sender.direction == UISwipeGestureRecognizerDirectionRight) {
             NSLog(@"右スワイプ");
-//            [sender setTranslation:CGPointZero inView:self.view];
         } else if (sender.direction == UISwipeGestureRecognizerDirectionLeft ) {
             NSLog(@"左スワイプ");
         }
     }
-    
-    NSLog(@"指の数: %d", sender.numberOfTouches);
+     */
+}
+- (void) touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event
+{
+    startLocation = [[touches anyObject] locationInView:self.detailImageView];
 }
 // ドラッグ中のx座標を監視して、画面の端付近なら対象プロパティを更新
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -142,9 +131,13 @@ BOOL isLeftEdge = false;
     } else {
         isRightEdge = NO;
     }
+    
+    // detailImageViewをドラッグ時に移動させる
+    CGPoint pt = [[touches anyObject] locationInView:self.detailImageView];
+    CGRect frame = [self.detailImageView frame];
+    frame.origin.x += pt.x - startLocation.x;
+    frame.origin.y += pt.y - startLocation.y;
+    [self.detailImageView setFrame:frame];
 }
-
-
-
 
 @end

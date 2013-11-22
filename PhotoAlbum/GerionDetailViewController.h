@@ -12,10 +12,7 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface GerionDetailViewController : UIViewController
-
 @property (nonatomic) NSURL *assetUrlFromSegue;
-- (IBAction)rightSwiped:(id)sender;
-- (IBAction)leftSwiped:(id)sender;
 - (IBAction)handlePinchGesture:(id)sender;
 - (IBAction)handleSwiped:(UISwipeGestureRecognizer *)sender;
 

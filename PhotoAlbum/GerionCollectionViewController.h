@@ -13,9 +13,6 @@ static NSMutableArray *assetList;
 
 @interface GerionCollectionViewController : UICollectionViewController
 
-// @property  NSMutableArray *assetList;
-//+ (NSMutableArray *)assetList;
-
 + (NSURL *)prevAssetUrl:(NSURL *)assetUrl;
 + (NSURL *)nextAssetUrl:(NSURL *)assetUrl;
 
