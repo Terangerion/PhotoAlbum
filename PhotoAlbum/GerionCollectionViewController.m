@@ -100,8 +100,7 @@ int itemCount;
     }
 }
 
-#pragma mark -
-#pragma mark プロトコル準拠させるためのメソッド群
+#pragma mark - プロトコル準拠させるためのメソッド群
 // http://xcatsan.blogspot.jp/2009/10/xcode-no.html
 // セクション数の返答用メソッド
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {

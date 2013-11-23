@@ -76,8 +76,7 @@ CGPoint startLocation;
              } failureBlock: nil];
 }
 
-#pragma ジェスチャー時のメソッド
-#pragma mark -
+#pragma mark - ジェスチャー時のメソッド
 
 // ピンチイン、ピンチアウト時のメソッド
 - (IBAction)handlePinchGesture:(UIPinchGestureRecognizer *)sender {
