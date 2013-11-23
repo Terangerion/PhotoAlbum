@@ -12,14 +12,14 @@
 
 @class GerionDetailViewController;
 
-@interface GerionCollectionViewController ()
+@interface GerionCollectionViewController () {
+    int itemCount;
+}
 
 @end
 
 @implementation GerionCollectionViewController
-
 ALAssetsLibrary *library;
-int itemCount;
 
 + (NSURL *)prevOrNextAssetUrl:(int)num assetUrl:(NSURL *)assetUrl {
     NSURL *hitAssetUrl;

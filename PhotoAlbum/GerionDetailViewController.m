@@ -9,7 +9,11 @@
 #import "GerionDetailViewController.h"
 #import "GerionCollectionViewController.h"
 
-@interface GerionDetailViewController ()
+@interface GerionDetailViewController () {
+    BOOL isRightEdge;
+    BOOL isLeftEdge;
+    CGPoint startLocation;
+}
 // IBOutlet用のプロパティをカプセル化
 @property (weak, nonatomic) IBOutlet UIImageView *detailImageView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
@@ -19,9 +23,6 @@
 @implementation GerionDetailViewController
 
 ALAssetsLibrary *library;
-BOOL isRightEdge = false;
-BOOL isLeftEdge = false;
-CGPoint startLocation;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,7 +36,8 @@ CGPoint startLocation;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    isRightEdge = false;
+    isLeftEdge = false;
     [self updateDetailViewWithImageIndexState:@"selected"];
 }
 
