@@ -36,7 +36,7 @@ CGPoint startLocation;
 {
     [super viewDidLoad];
     
-    [self updateDetailView:@"selected"];
+    [self updateDetailViewWithImageIndexState:@"selected"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -45,7 +45,7 @@ CGPoint startLocation;
     // Dispose of any resources that can be recreated.
 }
 
-- (void)updateDetailView:(NSString *)imageIndexState {
+- (void)updateDetailViewWithImageIndexState:(NSString *)imageIndexState {
     __block GerionDetailViewController *blocksafeSelf = self;
     NSURL *newAssetUrl;
     BOOL isSelected = NO;
@@ -89,9 +89,9 @@ CGPoint startLocation;
         // スワイプの方向による分岐
         // 右端まで（左端まで）来たら次の（前の）画像があれば、それを表示する。撮影日表示部を更新する。
         if ((sender.direction == UISwipeGestureRecognizerDirectionRight) && isRightEdge) {
-            [self updateDetailView:@"prev"];
+            [self updateDetailViewWithImageIndexState:@"prev"];
         } else if ((sender.direction == UISwipeGestureRecognizerDirectionLeft) && isLeftEdge ) {
-            [self updateDetailView:@"next"];
+            [self updateDetailViewWithImageIndexState:@"next"];
         }
     }
     /*
