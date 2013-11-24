@@ -97,6 +97,24 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Xf2-JU-3hL">
+                                <rect key="frame" x="0.0" y="64" width="60" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
+                                <state key="normal" title="タグ設定">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="S7A-To-zdR" kind="push" identifier="pushTagSegue" id="3bw-bC-KDb"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タグ一覧" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Ajx-n3-JzC">
+                                <rect key="frame" x="61" y="64" width="259" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -112,6 +130,8 @@
                         <outlet property="dateLabel" destination="fQi-Na-5QI" id="Rom-vu-BX3"/>
                         <outlet property="detailImageView" destination="9Od-9J-8h7" id="LsY-MM-5PF"/>
                         <outlet property="referenceCountLabel" destination="mkx-Ce-4aB" id="Z8o-KK-HhD"/>
+                        <outlet property="tagButton" destination="Xf2-JU-3hL" id="Y90-pk-WAM"/>
+                        <outlet property="tagListLabel" destination="Ajx-n3-JzC" id="HZy-fk-JjR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AZO-5P-4gT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -143,6 +163,43 @@
                 </swipeGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="227" y="324"/>
+        </scene>
+        <!--Gerion Tag Manage View Controller-->
+        <scene sceneID="qPV-Os-lPy">
+            <objects>
+                <viewController id="S7A-To-zdR" customClass="GerionTagManageViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IRQ-J6-Yc0">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="登録したいタグを入力" minimumFontSize="17" id="ixI-EE-rG2">
+                                <rect key="frame" x="20" y="231" width="193" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="z8f-QK-wDc">
+                                <rect key="frame" x="221" y="230" width="79" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="タグの登録">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="registedTag:" destination="S7A-To-zdR" eventType="touchUpInside" id="Hth-0i-Z1q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="tagRegistButton" destination="z8f-QK-wDc" id="b0R-Ge-Y6c"/>
+                        <outlet property="tagTextField" destination="ixI-EE-rG2" id="9Ze-iz-36W"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lr5-Z6-uuz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="643" y="324"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

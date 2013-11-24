@@ -8,6 +8,7 @@
 
 #import "GerionDetailViewController.h"
 #import "GerionCollectionViewController.h"
+#import "GerionTagManageViewController.h"
 #import "DetailImageModel.h"
 #import "TagModel.h"
 
@@ -20,6 +21,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *detailImageView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *referenceCountLabel;
+@property (weak, nonatomic) IBOutlet UIButton *tagButton;
+@property (weak, nonatomic) IBOutlet UILabel *tagListLabel;
 
 @end
 
@@ -39,11 +42,20 @@ ALAssetsLibrary *library;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.tagButton setBackgroundColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5]];
     isRightEdge = false;
     isLeftEdge = false;
     
     // 参照カウントの更新と取得
     self.referenceCountLabel.text = [[self updateReferenceCount] stringValue];
+    
+    // ユーザに設定されているタグをラベルに設定
+    if (0 < [[self getTagSet] count]) {
+        self.tagListLabel.text = [[[[self getTagSet] allObjects] valueForKey:@"name"] componentsJoinedByString:@" ,"];
+        [self.tagListLabel setBackgroundColor:[UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:0.5]];
+    } else {
+        self.tagListLabel.text = @"";
+    }
 
     // 詳細画像を更新
     [self updateDetailViewWithImageIndexState:@"selected"];
@@ -173,6 +185,25 @@ ALAssetsLibrary *library;
     return nowReferenceCount;
 }
 
+- (NSSet *)getTagSet {
+    NSSet *set;
+    for (DetailImageModel *d in [DetailImageModel findAll]) {
+        // DetailImageModelにassetUrlが既に存在するとき
+        if ([[self.assetUrlFromSegue absoluteString] isEqualToString:d.assetUrl]) {
+            set = d.tagModels;
+            break;
+        }
+    }
+    return set;
+}
 
+
+// セグエへの値渡し
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"pushTagSegue"]) {
+        GerionTagManageViewController *tagManageViewController = (GerionTagManageViewController *)[segue destinationViewController];
+        tagManageViewController.assetUrlFromSegue = self.assetUrlFromSegue;
+    }
+}
 
 @end

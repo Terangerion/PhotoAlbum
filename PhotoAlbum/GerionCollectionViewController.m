@@ -93,6 +93,7 @@ ALAssetsLibrary *library;
     // Dispose of any resources that can be recreated.
 }
 
+// セグエへの値渡し
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"pushCellSegue"]) {
         GerionDetailViewController *detailViewController = (GerionDetailViewController *)[segue destinationViewController];
