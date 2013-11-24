@@ -8,6 +8,8 @@
 
 #import "GerionDetailViewController.h"
 #import "GerionCollectionViewController.h"
+#import "DetailImageModel.h"
+#import "TagModel.h"
 
 @interface GerionDetailViewController () {
     BOOL isRightEdge;
@@ -17,6 +19,7 @@
 // IBOutlet用のプロパティをカプセル化
 @property (weak, nonatomic) IBOutlet UIImageView *detailImageView;
 @property (weak, nonatomic) IBOutlet UILabel *dateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *referenceCountLabel;
 
 @end
 
@@ -38,6 +41,11 @@ ALAssetsLibrary *library;
     [super viewDidLoad];
     isRightEdge = false;
     isLeftEdge = false;
+    
+    // 参照カウントの更新と取得
+    self.referenceCountLabel.text = [[self updateReferenceCount] stringValue];
+
+    // 詳細画像を更新
     [self updateDetailViewWithImageIndexState:@"selected"];
 }
 
@@ -137,5 +145,34 @@ ALAssetsLibrary *library;
     frame.origin.y += pt.y - startLocation.y;
     [self.detailImageView setFrame:frame];
 }
+
+
+- (NSNumber *)updateReferenceCount {
+    NSManagedObjectContext *magicalContext = [NSManagedObjectContext defaultContext];
+    // DetailImageModelにassetUrlが既に登録済みかどうか
+    BOOL isExistAssetUrl = NO;
+    NSNumber *nowReferenceCount = [NSNumber numberWithInteger:1];
+    for (DetailImageModel *d in [DetailImageModel findAll]) {
+        // DetailImageModelにassetUrlが既に存在するとき
+        if ([[self.assetUrlFromSegue absoluteString] isEqualToString:d.assetUrl]) {
+            isExistAssetUrl = YES;
+            // 参照カウントを更新
+            d.referenceCount = [NSNumber numberWithInteger:([d.referenceCount intValue] + 1)];
+            [magicalContext saveOnlySelfAndWait];
+            nowReferenceCount = d.referenceCount;
+            break;
+        }
+    }
+    // DetailImageModelにassetUrlが存在しないとき
+    if (!isExistAssetUrl) {
+        DetailImageModel *detailImageModel = [DetailImageModel createEntity];
+        detailImageModel.assetUrl = [self.assetUrlFromSegue absoluteString];
+        detailImageModel.referenceCount = [NSNumber numberWithInteger:1];
+        [magicalContext saveOnlySelfAndWait];
+    }
+    return nowReferenceCount;
+}
+
+
 
 @end

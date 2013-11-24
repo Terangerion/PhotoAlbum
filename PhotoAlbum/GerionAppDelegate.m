@@ -13,6 +13,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    // MagicalRecord の初期化
+    [MagicalRecord setupCoreDataStackWithStoreNamed:@"PhotoAlbum.sqlite"];
+
     return YES;
 }
 							
